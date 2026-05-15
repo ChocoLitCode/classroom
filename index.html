@@ -1,23 +1,66 @@
 <!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <title>Room 101</title>
-        <link rel="stylesheet" src="style.css">
-    </head>
-    <body>
-        <div class="room">Room 101</div>
-        <div class="uni">Micron University</div>
-        <div class="time">--:--</div>
-        <div class="date">--/--/----</div>
-        <div class="card">
-            <div class="control">
-                <div class="ctrl-light"></div>
-                <div class="ctrl-door"></div>
-            </div>
-            <div class="status">
-                <div class="stat-light"></div>
-                <div class="stat-door"></div>
-            </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classroom 101 Control Panel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="dash">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="label-classroom">Classroom</div>
+      <div class="time-block">
+        <div class="time-display" id="time-display">7:00AM</div>
+        <div class="date-display" id="date-display">Thurs | May 14, 2026</div>
+      </div>
+    </div>
+
+    <!-- Main Area -->
+    <div class="main-area">
+
+      <!-- Left: Room number + status chips -->
+      <div class="left-col">
+        <div class="room-number">101</div>
+        <div class="status-chips">
+          <div class="chip" id="lights-chip">
+            <div class="chip-label">Lights</div>
+            <div class="chip-value" id="lights-val">On</div>
+            <div class="chip-since">since 7hrs ago</div>
+          </div>
+          <div class="chip" id="door-chip">
+            <div class="chip-label">Door</div>
+            <div class="chip-value" id="door-val">Unlocked</div>
+            <div class="chip-since">since 7hrs ago</div>
+          </div>
         </div>
-    </body>
+      </div>
+
+      <!-- Right: System prompt + control buttons -->
+      <div class="right-col">
+        <div class="system-prompt" id="system-prompt">
+          <span style="opacity:0.6">System prompt appears here…</span>
+        </div>
+        <div class="control-buttons">
+          <button class="ctrl-btn active-light" id="btn-lights"
+                  onclick="toggleLights()" aria-label="Toggle lights">
+           <img id="btn-lights-icon" class="ctrl-icon" src="assets/light-on.svg" alt="lights icon">
+            <div class="ctrl-label" id="btn-lights-label">Turn off lights</div>
+          </button>
+          <button class="ctrl-btn" id="btn-door"
+                  onclick="toggleDoor()" aria-label="Toggle door lock">
+           <img id="btn-door-icon" class="ctrl-icon" src="assets/lock-open.svg" alt="lock icon">
+            <div class="ctrl-label" id="btn-door-label">Lock door</div>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>

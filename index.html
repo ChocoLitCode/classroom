@@ -15,7 +15,7 @@
       <div class="label-classroom">Classroom</div>
       <div class="time-block">
         <div class="time-display" id="time-display">7:00AM</div>
-        <div class="date-display" id="date-display">Thurs | May 14, 2026</div>
+        <div class="date-display" id="date-display">May 14, 2026</div>
       </div>
     </div>
 
@@ -39,25 +39,39 @@
         </div>
       </div>
 
-      <!-- Right: System prompt + control buttons -->
+      <!-- Right: Schedule + control buttons -->
       <div class="right-col">
-        <div class="system-prompt" id="system-prompt">
-          <span style="opacity:0.6">System prompt appears here…</span>
+
+        <!-- Schedule Section -->
+        <div class="schedule-section">
+          <div class="day-buttons">
+            <button class="day-btn" onclick="showSchedule(event, 'M')">M</button>
+            <button class="day-btn" onclick="showSchedule(event, 'T')">T</button>
+            <button class="day-btn" onclick="showSchedule(event, 'W')">W</button>
+            <button class="day-btn" onclick="showSchedule(event, 'Th')">Th</button>
+            <button class="day-btn" onclick="showSchedule(event, 'F')">F</button>
+            <button class="day-btn" onclick="showSchedule(event, 'Sat')">Sat</button>
+          </div>
+          <div class="schedule-popup" id="schedule-popup">
+            <div class="schedule-list" id="schedule-list"></div>
+          </div>
         </div>
+
+        <!-- Control Buttons -->
         <div class="control-buttons">
           <button class="ctrl-btn active-light" id="btn-lights"
                   onclick="toggleLights()" aria-label="Toggle lights">
-           <img id="btn-lights-icon" class="ctrl-icon" src="assets/light-on.svg" alt="lights icon">
+            <img id="btn-lights-icon" class="ctrl-icon" src="assets/light-on.svg" alt="lights icon">
             <div class="ctrl-label" id="btn-lights-label">Turn off lights</div>
           </button>
           <button class="ctrl-btn" id="btn-door"
                   onclick="toggleDoor()" aria-label="Toggle door lock">
-           <img id="btn-door-icon" class="ctrl-icon" src="assets/lock-open.svg" alt="lock icon">
+            <img id="btn-door-icon" class="ctrl-icon" src="assets/lock-open.svg" alt="lock icon">
             <div class="ctrl-label" id="btn-door-label">Lock door</div>
           </button>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 

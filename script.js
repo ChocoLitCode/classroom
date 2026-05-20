@@ -43,16 +43,12 @@ function toggleLights() {
 
 /* ── Door Toggle ── */
 function toggleDoor() {
+  // Instead of toggling directly, open RFID prompt first
   const action = doorLocked ? 'Unlock' : 'Lock';
   document.getElementById('rfid-title').textContent = `Enter RFID to ${action} Door`;
   document.getElementById('rfid-input').value = '';
   document.getElementById('rfid-overlay').classList.add('open');
-  const chip = document.getElementById('door-chip');
-  const val  = document.getElementById('door-val');
-  const btn  = document.getElementById('btn-door');
-  const icon = document.getElementById('btn-door-icon');
-  const lbl  = document.getElementById('btn-door-label');
-
+}
 
 function closeRFID() {
   document.getElementById('rfid-overlay').classList.remove('open');
@@ -95,21 +91,6 @@ function rfidSubmit() {
     btn.className    = 'ctrl-btn';
     icon.src         = 'assets/lock-open.svg';
     lbl.textContent  = 'Lock door';
-  }
-}
-
-  if (doorLocked) {
-    val.textContent = 'Locked';
-    chip.className  = 'chip locked';
-    btn.className   = 'ctrl-btn active-locked';
-    icon.src        = 'assets/lock-close.svg';
-    lbl.textContent = 'Unlock door';
-  } else {
-    val.textContent = 'Unlocked';
-    chip.className  = 'chip';
-    btn.className   = 'ctrl-btn';
-    icon.src        = 'assets/lock-open.svg';
-    lbl.textContent = 'Lock door';
   }
 }
 

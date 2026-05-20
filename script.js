@@ -45,11 +45,7 @@ function toggleLights() {
 function toggleDoor() {
   // Instead of toggling directly, open RFID prompt first
   const action = doorLocked ? 'Unlock' : 'Lock';
-<<<<<<< HEAD
   document.getElementById('rfid-title').textContent = `Tap or Enter RFID to ${action} Door`;
-=======
-  document.getElementById('rfid-title').textContent = `Enter RFID to ${action} Door`;
->>>>>>> c9001aa1ec9d07614b5ddb17edbb045e57e9417e
   document.getElementById('rfid-input').value = '';
   document.getElementById('rfid-overlay').classList.add('open');
 }

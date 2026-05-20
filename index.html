@@ -73,6 +73,69 @@
 
       </div>
     </div>
+
+        <!-- RFID Modal -->
+    <div class="rfid-overlay" id="rfid-overlay">
+      <div class="rfid-popup" id="rfid-popup">
+        <div class="rfid-header">
+          <span id="rfid-title">Enter RFID to Lock</span>
+          <button class="rfid-close" onclick="closeRFID()">✕</button>
+        </div>
+        <div class="rfid-input-row">
+          <input type="text" class="rfid-input" id="rfid-input" placeholder="RFID number" readonly />
+          <button class="rfid-clear" onclick="rfidClear()">⌫</button>
+        </div>
+        <div class="rfid-keyboard">
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('1')">1</button>
+            <button class="rfid-key" onclick="rfidType('2')">2</button>
+            <button class="rfid-key" onclick="rfidType('3')">3</button>
+            <button class="rfid-key" onclick="rfidType('4')">4</button>
+            <button class="rfid-key" onclick="rfidType('5')">5</button>
+            <button class="rfid-key" onclick="rfidType('6')">6</button>
+            <button class="rfid-key" onclick="rfidType('7')">7</button>
+            <button class="rfid-key" onclick="rfidType('8')">8</button>
+            <button class="rfid-key" onclick="rfidType('9')">9</button>
+            <button class="rfid-key" onclick="rfidType('0')">0</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('a')">a</button>
+            <button class="rfid-key" onclick="rfidType('b')">b</button>
+            <button class="rfid-key" onclick="rfidType('c')">c</button>
+            <button class="rfid-key" onclick="rfidType('d')">d</button>
+            <button class="rfid-key" onclick="rfidType('e')">e</button>
+            <button class="rfid-key" onclick="rfidType('f')">f</button>
+            <button class="rfid-key" onclick="rfidType('g')">g</button>
+            <button class="rfid-key" onclick="rfidType('h')">h</button>
+            <button class="rfid-key" onclick="rfidType('i')">i</button>
+            <button class="rfid-key" onclick="rfidType('j')">j</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('k')">k</button>
+            <button class="rfid-key" onclick="rfidType('l')">l</button>
+            <button class="rfid-key" onclick="rfidType('m')">m</button>
+            <button class="rfid-key" onclick="rfidType('n')">n</button>
+            <button class="rfid-key" onclick="rfidType('o')">o</button>
+            <button class="rfid-key" onclick="rfidType('p')">p</button>
+            <button class="rfid-key" onclick="rfidType('q')">q</button>
+            <button class="rfid-key" onclick="rfidType('r')">r</button>
+            <button class="rfid-key" onclick="rfidType('s')">s</button>
+            <button class="rfid-key" onclick="rfidType('t')">t</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('u')">u</button>
+            <button class="rfid-key" onclick="rfidType('v')">v</button>
+            <button class="rfid-key" onclick="rfidType('w')">w</button>
+            <button class="rfid-key" onclick="rfidType('x')">x</button>
+            <button class="rfid-key" onclick="rfidType('y')">y</button>
+            <button class="rfid-key" onclick="rfidType('z')">z</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key rfid-submit" onclick="rfidSubmit()">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

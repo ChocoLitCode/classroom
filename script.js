@@ -43,12 +43,60 @@ function toggleLights() {
 
 /* ── Door Toggle ── */
 function toggleDoor() {
-  doorLocked = !doorLocked;
+  const action = doorLocked ? 'Unlock' : 'Lock';
+  document.getElementById('rfid-title').textContent = `Enter RFID to ${action} Door`;
+  document.getElementById('rfid-input').value = '';
+  document.getElementById('rfid-overlay').classList.add('open');
   const chip = document.getElementById('door-chip');
   const val  = document.getElementById('door-val');
   const btn  = document.getElementById('btn-door');
   const icon = document.getElementById('btn-door-icon');
   const lbl  = document.getElementById('btn-door-label');
+
+
+function closeRFID() {
+  document.getElementById('rfid-overlay').classList.remove('open');
+  document.getElementById('rfid-input').value = '';
+}
+
+function rfidType(char) {
+  const input = document.getElementById('rfid-input');
+  input.value += char;
+}
+
+function rfidClear() {
+  const input = document.getElementById('rfid-input');
+  input.value = input.value.slice(0, -1);
+}
+
+function rfidSubmit() {
+  const val = document.getElementById('rfid-input').value.trim();
+  if (val === '') return;
+
+  closeRFID();
+
+  // Proceed with the actual door toggle
+  doorLocked = !doorLocked;
+  const chip = document.getElementById('door-chip');
+  const val2 = document.getElementById('door-val');
+  const btn  = document.getElementById('btn-door');
+  const icon = document.getElementById('btn-door-icon');
+  const lbl  = document.getElementById('btn-door-label');
+
+  if (doorLocked) {
+    val2.textContent = 'Locked';
+    chip.className   = 'chip locked';
+    btn.className    = 'ctrl-btn active-locked';
+    icon.src         = 'assets/lock-close.svg';
+    lbl.textContent  = 'Unlock door';
+  } else {
+    val2.textContent = 'Unlocked';
+    chip.className   = 'chip';
+    btn.className    = 'ctrl-btn';
+    icon.src         = 'assets/lock-open.svg';
+    lbl.textContent  = 'Lock door';
+  }
+}
 
   if (doorLocked) {
     val.textContent = 'Locked';

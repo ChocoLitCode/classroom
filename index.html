@@ -29,12 +29,12 @@
           <div class="chip" id="lights-chip">
             <div class="chip-label">Lights</div>
             <div class="chip-value" id="lights-val">On</div>
-            <div class="chip-since">since 7hrs ago</div>
+            <div class="chip-since">7hrs ago</div>
           </div>
           <div class="chip" id="door-chip">
             <div class="chip-label">Door</div>
             <div class="chip-value" id="door-val">Unlocked</div>
-            <div class="chip-since">since 7hrs ago</div>
+            <div class="chip-since">7hrs ago</div>
           </div>
         </div>
       </div>
@@ -52,6 +52,48 @@
             <button class="day-btn" onclick="showSchedule(event, 'F')">F</button>
             <button class="day-btn" onclick="showSchedule(event, 'Sat')">Sat</button>
           </div>
+
+          <!-- Schedule Data -->
+          <div class="schedule-data" style="display:none">
+
+            <div data-day="M">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+              <div data-subject="English"     data-meta="9:00AM – 10:00AM | Prof. Reyes"></div>
+              <div data-subject="PE"          data-meta="11:00AM – 12:00PM | Prof. Cruz"></div>
+            </div>
+
+            <div data-day="T">
+              <div data-subject="Science"     data-meta="7:00AM – 8:30AM | Prof. Lim"></div>
+              <div data-subject="History"     data-meta="9:00AM – 10:00AM | Prof. Gomez"></div>
+              <div data-subject="Art"         data-meta="11:00AM – 12:00PM | Prof. Tan"></div>
+              <div data-subject="Music"       data-meta="1:00PM – 2:00PM | Prof. Vega"></div>
+            </div>
+
+            <div data-day="W">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+              <div data-subject="Music"       data-meta="9:00AM – 10:00AM | Prof. Vega"></div>
+              <div data-subject="Science"     data-meta="11:00AM – 12:00PM | Prof. Lim"></div>
+            </div>
+
+            <div data-day="Th">
+              <div data-subject="Microprocessor" data-meta="9:00AM – 10:00AM | Prof. Brenda Maxine"></div>
+              <div data-subject="English"        data-meta="10:00AM – 11:00AM | Prof. Reyes"></div>
+              <div data-subject="History"        data-meta="1:00PM – 2:00PM | Prof. Gomez"></div>
+              <div data-subject="PE"             data-meta="2:00PM – 3:00PM | Prof. Cruz"></div>
+            </div>
+
+            <div data-day="F">
+              <div data-subject="Art"         data-meta="7:00AM – 8:30AM | Prof. Tan"></div>
+              <div data-subject="Mathematics" data-meta="9:00AM – 10:00AM | Prof. Santos"></div>
+              <div data-subject="Music"       data-meta="11:00AM – 12:00PM | Prof. Vega"></div>
+            </div>
+
+            <div data-day="Sat">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+            </div>
+
+          </div>
+
           <div class="schedule-popup" id="schedule-popup">
             <div class="schedule-list" id="schedule-list"></div>
           </div>

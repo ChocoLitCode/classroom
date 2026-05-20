@@ -66,12 +66,25 @@ function rfidClear() {
 }
 
 function rfidSubmit() {
-  const val = document.getElementById('rfid-input').value.trim();
-  if (val === '') return;
+  const input = document.getElementById('rfid-input');
+  const val   = input.value.trim();
+  const popup = document.getElementById('rfid-popup');
+
+  // Validate — empty or too short
+  if (val === '' || val.length < 4) {
+    // Trigger wiggle + red outline
+    popup.classList.remove('error');         // reset first in case it's already on
+    void popup.offsetWidth;                  // force reflow so animation restarts
+    popup.classList.add('error');
+
+    // Remove error state after animation finishes
+    setTimeout(() => popup.classList.remove('error'), 600);
+    return;
+  }
 
   closeRFID();
 
-  // Proceed with the actual door toggle
+  // Proceed with door toggle
   doorLocked = !doorLocked;
   const chip = document.getElementById('door-chip');
   const val2 = document.getElementById('door-val');
@@ -94,39 +107,6 @@ function rfidSubmit() {
   }
 }
 
-/* ── Schedule Data ── */
-const schedule = {
-  M: [
-    { subject: 'Mathematics',    meta: '7:00AM – 8:30AM  |  Prof. Santos' },
-    { subject: 'English',        meta: '9:00AM – 10:00AM  |  Prof. Reyes' },
-    { subject: 'Contemporary',             meta: '11:00AM – 12:00PM  |  Prof. Cruz' },
-  ],
-  T: [
-    { subject: 'Science',        meta: '7:00AM – 8:30AM  |  Prof. Lim' },
-    { subject: 'History',        meta: '9:00AM – 10:00AM  |  Prof. Gomez' },
-    { subject: 'Art',            meta: '11:00AM – 12:00PM  |  Prof. Tan' },
-    { subject: 'Music',          meta: '1:00PM – 2:00PM  |  Prof. Vega' },
-  ],
-  W: [
-    { subject: 'Mathematics',    meta: '7:00AM – 8:30AM  |  Prof. Santos' },
-    { subject: 'Music',          meta: '9:00AM – 10:00AM  |   Vega' },
-    { subject: 'Science',        meta: '11:00AM – 12:00PM  |  Prof. Lim' },
-  ],
-  Th: [
-    { subject: 'Microprocessor', meta: '9:00AM – 10:00AM  |  Prof. Brenda Maxine' },
-    { subject: 'English',        meta: '10:00AM – 11:00AM  |  Prof. Reyes' },
-    { subject: 'History',        meta: '1:00PM – 2:00PM  |  Prof. Gomez' },
-    { subject: 'Contemporary',             meta: '2:00PM – 3:00PM  |  Prof. Cruz' },
-  ],
-  F: [
-    { subject: 'Art',            meta: '7:00AM – 8:30AM  |  Prof. Tan' },
-    { subject: 'Mathematics',    meta: '9:00AM – 10:00AM  |  Prof. Santos' },
-    { subject: 'Music',          meta: '11:00AM – 12:00PM  |  Prof. Vega' },
-  ],
-  Sat: [
-    { subject: 'Mathematics',    meta: '7:00AM – 8:30AM  |  Prof. Santos' },
-  ],
-};
 
 /* ── Today's Day Key ── */
 const dayMap = { 0: null, 1: 'M', 2: 'T', 3: 'W', 4: 'Th', 5: 'F', 6: 'Sat' };
@@ -140,7 +120,6 @@ function showSchedule(event, day) {
 
   const alreadyActive = clicked.classList.contains('active') && popup.classList.contains('open');
 
-  // Reset all, then always restore today's teal
   allBtns.forEach(b => {
     b.classList.remove('active');
     if (b.textContent.trim() === todayKey) b.classList.add('active');
@@ -155,7 +134,7 @@ function showSchedule(event, day) {
     clicked.classList.add('active');
   }
 
-  // Position popup centered under the clicked button
+  // Position popup centered under clicked button
   const section = document.querySelector('.schedule-section');
   const btnRect  = clicked.getBoundingClientRect();
   const secRect  = section.getBoundingClientRect();
@@ -163,14 +142,17 @@ function showSchedule(event, day) {
   popup.style.left      = centerX + 'px';
   popup.style.transform = 'translateX(-50%)';
 
-  // Render schedule items
+  // Read schedule from HTML data attributes
+  const dayData = document.querySelector(`.schedule-data [data-day="${day}"]`);
+  const items   = dayData ? [...dayData.children] : [];
+
   const list = document.getElementById('schedule-list');
-  list.innerHTML = schedule[day].map(c => `
-  <div class="schedule-item">
-    <span class="schedule-subject">${c.subject}</span>
-    <span class="schedule-meta">${c.meta}</span>
-  </div>
-`).join('');
+  list.innerHTML = items.map(item => `
+    <div class="schedule-item">
+      <span class="schedule-subject">${item.dataset.subject}</span>
+      <span class="schedule-meta">${item.dataset.meta}</span>
+    </div>
+  `).join('');
 
   popup.classList.add('open');
 }

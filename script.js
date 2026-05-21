@@ -20,6 +20,7 @@ function updateClock() {
 /* ── Lights Toggle ── */
 function toggleLights() {
   lightsOn = !lightsOn;
+  lightsSince = Date.now();
   const chip = document.getElementById('lights-chip');
   const val  = document.getElementById('lights-val');
   const btn  = document.getElementById('btn-lights');
@@ -39,6 +40,29 @@ function toggleLights() {
     lbl.textContent = 'Turn on lights';
     icon.src        = 'assets/light-off.svg';
   }
+}
+
+// Track when lights state last changed
+let lightsSince = Date.now();
+
+function updateLightsSince() {
+  const elapsed = Date.now() - lightsSince;
+  const totalSeconds = Math.floor(elapsed / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const hours   = Math.floor(minutes / 60);
+  const days    = Math.floor(hours / 24);
+
+  let duration = '';
+  if (days > 0)         duration = `${days}d ${hours % 24}hrs`;
+  else if (hours > 0)   duration = `${hours}hrs ${minutes % 60}min`;
+  else if (minutes > 0) duration = `${minutes}min`;
+  else                  duration = 'just now';
+ 
+   const text  = duration === 'just now'
+    ? `just now`
+    : `for ${duration}`;
+
+  document.querySelector('#lights-chip .chip-since').textContent = text;
 }
 
 /* ── Door Toggle ── */
@@ -166,4 +190,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 updateClock();
+updateLightsSince();
 setInterval(updateClock, 10000);
+setInterval(updateLightsSince, 1000);

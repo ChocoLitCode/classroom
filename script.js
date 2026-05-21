@@ -115,6 +115,7 @@ function rfidSubmit() {
   const btn  = document.getElementById('btn-door');
   const icon = document.getElementById('btn-door-icon');
   const lbl  = document.getElementById('btn-door-label');
+  const by = document.getElementById('door-by');
 
   if (doorLocked) {
     val2.textContent = 'Locked';
@@ -122,12 +123,14 @@ function rfidSubmit() {
     btn.className    = 'ctrl-btn active-locked';
     icon.src         = 'assets/lock-close.svg';
     lbl.textContent  = 'Unlock door';
+    by.textContent = `by ${val}`;
   } else {
     val2.textContent = 'Unlocked';
     chip.className   = 'chip';
     btn.className    = 'ctrl-btn';
     icon.src         = 'assets/lock-open.svg';
     lbl.textContent  = 'Lock door';
+    by.textContent = `by ${val}`;
   }
 }
 

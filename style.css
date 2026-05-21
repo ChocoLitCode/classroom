@@ -111,9 +111,9 @@ body {
 .chip.off    .chip-value { color: #F1EFE8; }
 .chip.locked .chip-value { color: #fde8e8; }
 
-.chip-since { font-size: 12px; color: #5DCAA5; margin-top: 3px; }
+.chip-since, .chip-by { font-size: 12px; color: #5DCAA5; margin-top: 3px; }
 .chip.off    .chip-since { color: #B4B2A9; }
-.chip.locked .chip-since { color: #f4b4b4; }
+.chip.locked .chip-by { color: #f4b4b4; }
 
 /* ── Right Column ── */
 .right-col { display: flex; flex-direction: column; gap: 20px; }

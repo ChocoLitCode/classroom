@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classroom 101 Control Panel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="dash">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="label-classroom">Classroom</div>
+      <div class="time-block">
+        <div class="time-display" id="time-display">--:--</div>
+        <div class="date-display" id="date-display">--</div>
+      </div>
+    </div>
+
+    <!-- Main Area -->
+    <div class="main-area">
+
+      <!-- Left: Room number + status chips -->
+      <div class="left-col">
+        <div class="room-number">101</div>
+        <div class="status-chips">
+          <div class="chip" id="lights-chip">
+            <div class="chip-label">Lights</div>
+            <div class="chip-value" id="lights-val">--</div>
+            <div class="chip-since">for --</div>
+            <div class="chip-reminder" id="lights-reminder">
+              Can only be toggled when system is unlocked
+            </div>
+          </div>
+          <div class="chip" id="door-chip">
+            <div class="chip-label">System</div>
+            <div class="chip-value" id="door-val">--</div>
+            <div class="chip-by" id="door-by">by --</div>
+            <div class="chip-door-status" id="door-status">
+              Door Closed
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Schedule + control buttons -->
+      <div class="right-col">
+
+        <!-- Schedule Section -->
+        <div class="schedule-section">
+          <div class="day-buttons">
+            <button class="day-btn" onclick="showSchedule(event, 'M')">M</button>
+            <button class="day-btn" onclick="showSchedule(event, 'T')">T</button>
+            <button class="day-btn" onclick="showSchedule(event, 'W')">W</button>
+            <button class="day-btn" onclick="showSchedule(event, 'Th')">Th</button>
+            <button class="day-btn" onclick="showSchedule(event, 'F')">F</button>
+            <button class="day-btn" onclick="showSchedule(event, 'Sat')">Sat</button>
+          </div>
+
+          <!-- Schedule Data -->
+          <div class="schedule-data" style="display:none">
+
+            <div data-day="M">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+              <div data-subject="English" data-meta="9:00AM – 10:00AM | Prof. Reyes"></div>
+              <div data-subject="PE" data-meta="11:00AM – 12:00PM | Prof. Cruz"></div>
+            </div>
+
+            <div data-day="T">
+              <div data-subject="Science" data-meta="7:00AM – 8:30AM | Prof. Lim"></div>
+              <div data-subject="History" data-meta="9:00AM – 10:00AM | Prof. Gomez"></div>
+              <div data-subject="Art" data-meta="11:00AM – 12:00PM | Prof. Tan"></div>
+              <div data-subject="Music" data-meta="1:00PM – 2:00PM | Prof. Vega"></div>
+            </div>
+
+            <div data-day="W">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+              <div data-subject="Music" data-meta="9:00AM – 10:00AM | Prof. Vega"></div>
+              <div data-subject="Science" data-meta="11:00AM – 12:00PM | Prof. Lim"></div>
+            </div>
+
+            <div data-day="Th">
+              <div data-subject="Microprocessor" data-meta="9:00AM – 10:00AM | Prof. Brenda Maxine"></div>
+              <div data-subject="English" data-meta="10:00AM – 11:00AM | Prof. Reyes"></div>
+              <div data-subject="History" data-meta="1:00PM – 2:00PM | Prof. Gomez"></div>
+              <div data-subject="PE" data-meta="2:00PM – 3:00PM | Prof. Cruz"></div>
+            </div>
+
+            <div data-day="F">
+              <div data-subject="Art" data-meta="7:00AM – 8:30AM | Prof. Tan"></div>
+              <div data-subject="Mathematics" data-meta="9:00AM – 10:00AM | Prof. Santos"></div>
+              <div data-subject="Music" data-meta="11:00AM – 12:00PM | Prof. Vega"></div>
+            </div>
+
+            <div data-day="Sat">
+              <div data-subject="Mathematics" data-meta="7:00AM – 8:30AM | Prof. Santos"></div>
+            </div>
+
+          </div>
+
+          <div class="schedule-popup" id="schedule-popup">
+            <div class="schedule-list" id="schedule-list"></div>
+          </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="control-buttons">
+          <button class="ctrl-btn active-light" id="btn-lights" onclick="toggleLights()" aria-label="Toggle lights">
+            <img id="btn-lights-icon" class="ctrl-icon" src="assets/light-on.svg" alt="lights icon">
+            <div class="ctrl-label" id="btn-lights-label">Turn off lights</div>
+          </button>
+          <button class="ctrl-btn" id="btn-door" onclick="toggleDoor()" aria-label="Toggle door lock">
+            <img id="btn-door-icon" class="ctrl-icon" src="assets/lock-open.svg" alt="lock icon">
+            <div class="ctrl-label" id="btn-door-label">Lock door</div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RFID Modal -->
+    <div class="rfid-overlay" id="rfid-overlay">
+      <div class="rfid-popup" id="rfid-popup">
+        <div class="rfid-header">
+          <span id="rfid-title">Enter RFID to Lock</span>
+          <button class="rfid-close" onclick="closeRFID()">✕</button>
+        </div>
+        <div class="rfid-input-row">
+          <input type="text" class="rfid-input" id="rfid-input" placeholder="RFID number" readonly />
+          <button class="rfid-clear" onclick="rfidClear()">⌫</button>
+        </div>
+        <div class="rfid-keyboard">
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('1')">1</button>
+            <button class="rfid-key" onclick="rfidType('2')">2</button>
+            <button class="rfid-key" onclick="rfidType('3')">3</button>
+            <button class="rfid-key" onclick="rfidType('4')">4</button>
+            <button class="rfid-key" onclick="rfidType('5')">5</button>
+            <button class="rfid-key" onclick="rfidType('6')">6</button>
+            <button class="rfid-key" onclick="rfidType('7')">7</button>
+            <button class="rfid-key" onclick="rfidType('8')">8</button>
+            <button class="rfid-key" onclick="rfidType('9')">9</button>
+            <button class="rfid-key" onclick="rfidType('0')">0</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('a')">a</button>
+            <button class="rfid-key" onclick="rfidType('b')">b</button>
+            <button class="rfid-key" onclick="rfidType('c')">c</button>
+            <button class="rfid-key" onclick="rfidType('d')">d</button>
+            <button class="rfid-key" onclick="rfidType('e')">e</button>
+            <button class="rfid-key" onclick="rfidType('f')">f</button>
+            <button class="rfid-key" onclick="rfidType('g')">g</button>
+            <button class="rfid-key" onclick="rfidType('h')">h</button>
+            <button class="rfid-key" onclick="rfidType('i')">i</button>
+            <button class="rfid-key" onclick="rfidType('j')">j</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('k')">k</button>
+            <button class="rfid-key" onclick="rfidType('l')">l</button>
+            <button class="rfid-key" onclick="rfidType('m')">m</button>
+            <button class="rfid-key" onclick="rfidType('n')">n</button>
+            <button class="rfid-key" onclick="rfidType('o')">o</button>
+            <button class="rfid-key" onclick="rfidType('p')">p</button>
+            <button class="rfid-key" onclick="rfidType('q')">q</button>
+            <button class="rfid-key" onclick="rfidType('r')">r</button>
+            <button class="rfid-key" onclick="rfidType('s')">s</button>
+            <button class="rfid-key" onclick="rfidType('t')">t</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key" onclick="rfidType('u')">u</button>
+            <button class="rfid-key" onclick="rfidType('v')">v</button>
+            <button class="rfid-key" onclick="rfidType('w')">w</button>
+            <button class="rfid-key" onclick="rfidType('x')">x</button>
+            <button class="rfid-key" onclick="rfidType('y')">y</button>
+            <button class="rfid-key" onclick="rfidType('z')">z</button>
+          </div>
+          <div class="rfid-row">
+            <button class="rfid-key rfid-submit" onclick="rfidSubmit()">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
